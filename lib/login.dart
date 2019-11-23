@@ -27,16 +27,16 @@ class FundoLogo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.width / 1.3,
+      height: MediaQuery.of(context).size.width / 1.4,
       decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [Colors.green, Colors.teal],
+            colors: [Colors.lightGreen, Colors.green],
           ),
           borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(89),
-              bottomRight: Radius.circular(0))),
+       )),
       child: Center(
           child: Image(
         image: AssetImage('imagens/logo_agro.png'),
@@ -101,7 +101,7 @@ class EmailInputContainer extends StatelessWidget {
         decoration: InputDecoration(
             icon: Icon(
               Icons.email,
-              color: Colors.teal,
+              color: Colors.lightGreen,
             ),
             hintText: "E-mail",
             border: InputBorder.none),
@@ -124,7 +124,7 @@ class SenhaInputContainer extends StatelessWidget {
         decoration: InputDecoration(
             icon: Icon(
               Icons.vpn_key,
-              color: Colors.teal,
+              color: Colors.lightGreen,
             ),
             hintText: "Senha",
             border: InputBorder.none),
@@ -161,7 +161,7 @@ class AcessarButtonContainer extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment.bottomLeft,
           end: Alignment.bottomCenter,
-          colors: [Colors.green, Colors.teal],
+          colors: [Colors.green, Colors.lightGreen],
         ),
       ),
       child: MaterialButton(

@@ -11,6 +11,8 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^0.1.2
+  charts_flutter: ^0.8.1
+  syncfusion_flutter_charts: ^17.3.26
 
 dev_dependencies:
   flutter_test:
