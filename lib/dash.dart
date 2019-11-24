@@ -12,6 +12,7 @@ class DashBoard extends StatefulWidget {
 }
 
 class _DashBoardState extends State<DashBoard> {
+
   int menuIndex = 0;
 
   @override
@@ -19,10 +20,10 @@ class _DashBoardState extends State<DashBoard> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-            title: Center(child: Text('Dashboard')),
+            title: Center(child: changeTitle(menuIndex)),
             backgroundColor: Colors.lightGreen),
         body: pageWiew(),
-        bottomNavigationBar: menuNav(menuIndex),
+        bottomNavigationBar: menuNav(context),
       ),
     );
   }
@@ -31,49 +32,59 @@ class _DashBoardState extends State<DashBoard> {
   void initState() {
     super.initState();
   }
+   
   //paginação
   PageController page = PageController(initialPage: 0, keepPage: true);
 
   Widget pageWiew() {
-    var pageView = PageView(
-        controller: page,
-        onPageChanged: (index) {
-          pageChange(index);
-        },
-        //TODO:Importar paginas aqui!!! [0,1,2,3...]
-        children: <Widget>[
-          new HomeConteudo()    
+    return PageView(
+      controller: page,
+      onPageChanged: (index) {
+        print(index);
+        pageChange(index);
+      },
+      //TODO:Importar paginas aqui!!! [0,1,2,3...]
+      children: <Widget>[
+        new HomeConteudo(), 
+        new Red(),
+        new Blue()
         ],
-      );
-    return pageView;
+    );
   }
+
+
+  void tap(int index) {
+    setState(() {
+      menuIndex = index;
+      page.animateToPage(index,duration: Duration(milliseconds: 500), curve: Curves.ease);
+    });
+  }
+
 
   void pageChange(int index) {
     setState(() {
       menuIndex = index;
     });
   }
-
-  void tap(var index) {
-    setState(() {
-      menuIndex = index;
-      page.animateTo(index,
-          duration: Duration(milliseconds: 500), curve: Curves.ease);
-    });
-  }
-
 //navegação de items ps --refac extrair para o shared ....
-  Widget menuNav(int index) => BottomNavigationBar(
-        currentIndex: index,
-        onTap: (index) {
-          tap(index);
-        },
-        items: menuItensNav(),
+  Widget menuNav(BuildContext context) => Theme(
+        data: Theme.of(context).copyWith(
+          canvasColor: const Color.fromARGB(255, 107, 205, 18),
+        ),
+        child: BottomNavigationBar(
+          onTap: (index) {
+            tap(index);
+          },
+          currentIndex: menuIndex,
+          fixedColor: Colors.white,
+          items: menuItensNav(),
+          backgroundColor: Colors.black45,
+        ),
       );
 
   List<BottomNavigationBarItem> menuItensNav() => [
         BottomNavigationBarItem(
-          icon: Icon(Icons.home,color: Colors.white),
+          icon: Icon(Icons.home, color: Colors.white),
           title: Text('Inicio'),
         ),
         BottomNavigationBarItem(
@@ -81,7 +92,7 @@ class _DashBoardState extends State<DashBoard> {
           title: Text('Galeria'),
         ),
         BottomNavigationBarItem(
-          icon: Icon( Icons.photo_camera,color: Colors.white),
+          icon: Icon(Icons.camera_alt, color: Colors.white, size: 30),
           title: Text('Câmera'),
         ),
         BottomNavigationBarItem(
@@ -89,9 +100,48 @@ class _DashBoardState extends State<DashBoard> {
           title: Text('Predições'),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.info,color: Colors.white),
+          icon: Icon(Icons.info, color: Colors.white),
           title: Text('Info'),
         ),
       ];
 //fim dash
+}
+
+//@test
+class Red extends StatefulWidget {
+  @override
+  _RedState createState() => _RedState();
+}
+
+class _RedState extends State<Red> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.red,
+    );
+  }
+}
+
+//@test
+class Blue extends StatefulWidget {
+  @override
+  _BlueState createState() => _BlueState();
+}
+
+class _BlueState extends State<Blue> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.blue,
+    );
+  }
+}
+
+//refatorar later
+ Text changeTitle(int index){
+  if(index == 0) return Text('DashBoard');
+  else if(index == 1) return Text('Galeria');
+  else if(index == 2) return Text('Câmera');
+  else if(index == 3) return Text('Predições');
+  else return Text('Info');
 }
