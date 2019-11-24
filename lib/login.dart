@@ -122,11 +122,13 @@ class SenhaInputContainer extends StatelessWidget {
           color: Colors.white,
           boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 10)]),
       child: TextField(
+        obscureText: true,
         decoration: InputDecoration(
             icon: Icon(
               Icons.vpn_key,
               color: Colors.lightGreen,
             ),
+
             hintText: "Senha",
             border: InputBorder.none),
       ),
