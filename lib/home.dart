@@ -6,7 +6,12 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 @author: Luis Antônio
 conteudo home ---noticias e gráficos 
 */
-class HomeConteudo extends StatelessWidget {
+class HomeConteudo extends StatefulWidget {
+  @override
+  _HomeConteudoState createState() => _HomeConteudoState();
+}
+
+class _HomeConteudoState extends State<HomeConteudo> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -19,12 +24,13 @@ class HomeConteudo extends StatelessWidget {
             children: <Widget>[
               //predições realizadas
               Container(
-                width: MediaQuery.of(context).size.width / 1.1,
+                width: MediaQuery.of(context).size.width /0.5,
                 height: MediaQuery.of(context).size.width,
                 child: Card(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0)),
                   child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       const ListTile(
                         leading: Icon(Icons.insert_chart),
@@ -39,6 +45,7 @@ class HomeConteudo extends StatelessWidget {
                   ),
                 ),
               ),
+              SizedBox(height: MediaQuery.of(context).size.width/20),
               Card(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0)),
@@ -55,6 +62,16 @@ class HomeConteudo extends StatelessWidget {
                           'imagens/news1.jpg',
                           1),
                       SizedBox(height: 5),
+                      noticiaRow(
+                          context,
+                          'Exportações do agronegócio são recordes mas faturamento cai',
+                          'imagens/news1.jpg',
+                          2),
+                      noticiaRow(
+                          context,
+                          'Exportações do agronegócio são recordes mas faturamento cai',
+                          'imagens/news1.jpg',
+                          3),
                     ],
                   ),
                 ),
@@ -66,29 +83,25 @@ class HomeConteudo extends StatelessWidget {
     );
   }
 }
-
-Widget noticiaRow(
-    BuildContext context, String titulo, String imagemNoticia, int idNoticia) => MaterialButton(
-    minWidth: MediaQuery.of(context).size.width / 1.1,
-    child: Row(
-      children: <Widget>[
-        CircleAvatar(
-          maxRadius: 35,
-          backgroundImage: AssetImage(imagemNoticia),
+ 
+Widget noticiaRow(BuildContext context, String titulo, String imagemNoticia,
+        int idNoticia) =>
+    MaterialButton(
+      child: Card(
+        child: ListTile(
+          leading: CircleAvatar(
+            maxRadius: 35,
+            backgroundImage: AssetImage(imagemNoticia),
+          ),
+          title:Text(titulo),
         ),
-        SizedBox(height: 5),
-        Text(
-          titulo,
-        ),
-      ],
-    ),
-    onPressed: () {
-      print('tap noticia');
-    },
-  );
+      ),
+      onPressed: () {
+        print('tap noticia');
+      },
+    );
 
 class GraficoContainer extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Container(
