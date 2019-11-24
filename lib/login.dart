@@ -1,8 +1,9 @@
 import 'package:agro_app/dash.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-/* 
+/*
   @author :Luis Antônio 
   //Pagina princinpal de login
 */
@@ -40,9 +41,10 @@ class FundoLogo extends StatelessWidget {
        )),
       child: Center(
           child: Image(
-        image: AssetImage('imagens/logo_agro.png'),
-        width: MediaQuery.of(context).size.width / 1.8,
-      )),
+            image: AssetImage('imagens/logo_agro.png'),
+            width: MediaQuery.of(context).size.width / 1.8,
+        ),
+      ),
     );
   }
 }
@@ -52,45 +54,48 @@ class FormularioWig extends StatefulWidget {
 }
 
 class FormularioState extends State<FormularioWig> {
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  String email;
+  String password;
+
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(top: 60),
-      child: Column(
-        children: <Widget>[
-          new EmailInputContainer(),
-          SizedBox(height: 20),
-          new SenhaInputContainer(),
-          SizedBox(height: 20),
-          new AcessarButtonContainer(),
-          SizedBox(height: 10),
-          new EsqueceuButtonContainer(),
-          SizedBox(height: 15),
-          Container(
-            child: MaterialButton(
-              child: Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text('Não possui cadastro ? ',style:TextStyle(color:Colors.black45),),
-                    Text('Cadastre-se.',style: TextStyle(color: Colors.blue[400]),)
-                  ],
+        child: Column(
+          children: <Widget>[
+            showEmailInputContainer(),
+            SizedBox(height: 20),
+            showSenhaInputContainer(),
+            SizedBox(height: 20),
+            showAcessarButtonContainer(),
+            SizedBox(height: 10),
+            showEsqueceuButtonContainer(),
+            SizedBox(height: 15),
+            Container(
+              child: MaterialButton(
+                child: Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text('Não possui cadastro ? ',style:TextStyle(color:Colors.black45),),
+                      Text('Cadastre-se.',style: TextStyle(color: Colors.blue[400]),)
+                    ],
+                  ),
                 ),
+                onPressed: () {
+                  print('Cadastrar novo Usuario!');
+                },
               ),
-              onPressed: () {
-                print('Cadastrar novo Usuario!');
-              },
             ),
-          ),
-        ],
-      ),
+          ],
+        ),
     );
   }
-}
 
-class EmailInputContainer extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
+  Widget showEmailInputContainer() {
     return Container(
       width: MediaQuery.of(context).size.width / 1.3,
       padding: EdgeInsets.fromLTRB(16, 4, 16, 4),
@@ -99,21 +104,23 @@ class EmailInputContainer extends StatelessWidget {
           color: Colors.white,
           boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 10)]),
       child: TextField(
+        keyboardType: TextInputType.emailAddress,
+        onChanged: (value) {
+          email = value;
+        },
         decoration: InputDecoration(
             icon: Icon(
               Icons.email,
               color: Colors.lightGreen,
             ),
             hintText: "E-mail",
-            border: InputBorder.none),
+            border: InputBorder.none
+        ),
       ),
     );
   }
-}
 
-class SenhaInputContainer extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
+  Widget showSenhaInputContainer() {
     return Container(
       width: MediaQuery.of(context).size.width / 1.3,
       padding: EdgeInsets.fromLTRB(16, 4, 16, 4),
@@ -122,6 +129,9 @@ class SenhaInputContainer extends StatelessWidget {
           color: Colors.white,
           boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 10)]),
       child: TextField(
+        onChanged: (value) {
+          password = value;
+        },
         obscureText: true,
         decoration: InputDecoration(
             icon: Icon(
@@ -130,15 +140,13 @@ class SenhaInputContainer extends StatelessWidget {
             ),
 
             hintText: "Senha",
-            border: InputBorder.none),
+            border: InputBorder.none
+        ),
       ),
     );
   }
-}
 
-class EsqueceuButtonContainer extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
+  Widget showEsqueceuButtonContainer() {
     return Container(
       child: MaterialButton(
         child: Text(
@@ -151,11 +159,8 @@ class EsqueceuButtonContainer extends StatelessWidget {
       ),
     );
   }
-}
 
-class AcessarButtonContainer extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
+  Widget showAcessarButtonContainer() {
     return Container(
       width: MediaQuery.of(context).size.width / 1.3,
       padding: EdgeInsets.fromLTRB(16, 4, 16, 4),
@@ -171,16 +176,28 @@ class AcessarButtonContainer extends StatelessWidget {
         child: Center(
           child: Text(
             'Acessar',
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(
+                color: Colors.white
+            ),
           ),
         ),
-        onPressed: () {
-          print('logar para dash');
-          if(true){
-            Navigator.push(context,MaterialPageRoute(builder: (context)=> DashBoard()));
-          }
+        onPressed: () async {
+          await signIn();
         },
       ),
     );
+  }
+
+  Future signIn() async {
+    try {
+      final user = await _auth.signInWithEmailAndPassword(email: email, password: password);
+
+      if(user != null) {
+        Navigator.push(context, MaterialPageRoute(builder: (context)=> DashBoard()));
+      }
+
+    } catch (e) {
+      print(e);
+    }
   }
 }

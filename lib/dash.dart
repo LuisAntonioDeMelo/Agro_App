@@ -139,9 +139,9 @@ class _BlueState extends State<Blue> {
 
 //refatorar later
  Text changeTitle(int index){
-  if(index == 0) return Text('DashBoard');
+  if(index == 0) return Text('Dashboard');
   else if(index == 1) return Text('Galeria');
   else if(index == 2) return Text('Câmera');
   else if(index == 3) return Text('Predições');
-  else return Text('Info');
+  else return Text('Informações');
 }

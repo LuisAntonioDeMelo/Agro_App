@@ -10,7 +10,8 @@ dependencies:
   flutter:
     sdk: flutter
   firebase_core: ^0.4.0
-  firebase_auth: ^0.15.0+1
+  firebase_auth: ^0.14.0
+  firebase_storage: ^3.0.4
 
   cupertino_icons: ^0.1.2
   charts_flutter: ^0.8.1
