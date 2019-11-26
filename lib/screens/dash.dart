@@ -1,5 +1,7 @@
+
+import 'package:agro_app/screens/screens.galeria/galeria.dart';
+import 'package:agro_app/screens/screens.home/home.dart';
 import 'package:flutter/material.dart';
-import 'home.dart';
 
 /*
 @author:Luis Antônio :
@@ -46,6 +48,7 @@ class _DashBoardState extends State<DashBoard> {
       //TODO:Importar paginas aqui!!! [0,1,2,3...]
       children: <Widget>[
         new HomeConteudo(), 
+        new GaleriaImagens(),
         new Red(),
         new Blue()
         ],

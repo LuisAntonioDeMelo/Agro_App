@@ -1,4 +1,4 @@
-import 'package:agro_app/model/Predicao.dart';
+import 'package:agro_app/shared/models/Predicao.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
@@ -105,9 +105,11 @@ class GraficoContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(8),
+      padding: EdgeInsets.all(6),
       decoration: BoxDecoration(border: Border.all(color: Colors.black12)),
       child: Container(
+        width: MediaQuery.of(context).size.width/1.1,
+        height:MediaQuery.of(context).size.height/2.8,
         child: SfCartesianChart(
             primaryXAxis: CategoryAxis(),
             legend: Legend(isVisible: true),

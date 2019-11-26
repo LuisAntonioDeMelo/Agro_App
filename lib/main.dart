@@ -1,6 +1,5 @@
+import 'package:agro_app/screens/screens.login/login.dart';
 import 'package:flutter/material.dart';
-
-import 'login.dart';
 
 void main() => runApp(MyApp());
 
