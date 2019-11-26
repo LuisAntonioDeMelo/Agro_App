@@ -1,6 +1,6 @@
-# agro_app
+# AgroUp 
 
-A new Flutter project.
+A Flutter App project.
 
 ## Getting Started
 
