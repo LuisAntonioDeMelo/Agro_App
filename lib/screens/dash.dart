@@ -1,7 +1,12 @@
 
+import 'dart:io';
+
+import 'package:agro_app/components/camera-permissao.component.dart';
 import 'package:agro_app/screens/screens.galeria/galeria.dart';
 import 'package:agro_app/screens/screens.home/home.dart';
+import 'package:agro_app/screens/screens.predicoes/predicoes.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 /*
 @author:Luis Antônio :
@@ -15,6 +20,7 @@ class DashBoard extends StatefulWidget {
 
 class _DashBoardState extends State<DashBoard> {
 
+  File imagem;
   int menuIndex = 0;
 
   @override
@@ -50,6 +56,7 @@ class _DashBoardState extends State<DashBoard> {
         new HomeConteudo(), 
         new GaleriaImagens(),
         new Red(),
+        new PredicoesWidget(),
         new Blue()
         ],
     );
@@ -77,6 +84,10 @@ class _DashBoardState extends State<DashBoard> {
         child: BottomNavigationBar(
           onTap: (index) {
             tap(index);
+            if(index == 2){
+                obterCamera(imagem);
+              print("Open cam");
+            }
           },
           currentIndex: menuIndex,
           fixedColor: Colors.white,
@@ -95,7 +106,7 @@ class _DashBoardState extends State<DashBoard> {
           title: Text('Galeria'),
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.camera_alt, color: Colors.white, size: 30),
+          icon: Icon(Icons.camera_alt, color: Colors.blueGrey[800], size: 30),
           title: Text('Câmera'),
         ),
         BottomNavigationBarItem(
@@ -108,6 +119,20 @@ class _DashBoardState extends State<DashBoard> {
         ),
       ];
 //fim dash
+  Future obterCamera(File imagem) async {
+    try {
+      if (await isContemPermissoes()) {
+        var imagemGaleria =
+            await ImagePicker.pickImage(source: ImageSource.camera);
+        this.setState(() {
+          imagem = imagemGaleria;
+        });
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
 }
 
 //@test
@@ -148,3 +173,4 @@ class _BlueState extends State<Blue> {
   else if(index == 3) return Text('Predições');
   else return Text('Informações');
 }
+

@@ -88,6 +88,7 @@ Widget noticiaRow(BuildContext context, String titulo, String imagemNoticia,
         int idNoticia) =>
     MaterialButton(
       child: Card(
+        elevation: 0,
         child: ListTile(
           leading: CircleAvatar(
             maxRadius: 35,
