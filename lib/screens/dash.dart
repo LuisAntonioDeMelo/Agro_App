@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:agro_app/components/camera-permissao.component.dart';
 import 'package:agro_app/screens/screens.galeria/galeria.dart';
 import 'package:agro_app/screens/screens.home/home.dart';
+import 'package:agro_app/screens/screens.info/infor.dart';
 import 'package:agro_app/screens/screens.predicoes/predicoes.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -57,7 +58,7 @@ class _DashBoardState extends State<DashBoard> {
         new GaleriaImagens(),
         new Red(),
         new PredicoesWidget(),
-        new Blue()
+        new InfoComponent(),
         ],
     );
   }
@@ -170,7 +171,7 @@ class _BlueState extends State<Blue> {
   if(index == 0) return Text('Dashboard');
   else if(index == 1) return Text('Galeria');
   else if(index == 2) return Text('Câmera');
-  else if(index == 3) return Text('Predições');
+  else if(index == 3) return Text('Lista de Predições');
   else return Text('Informações');
 }
 
