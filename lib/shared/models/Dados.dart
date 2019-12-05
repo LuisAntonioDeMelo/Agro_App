@@ -1,15 +1,21 @@
 class Dados {
   String titulo;
+  String tipo;
   String descricao;
   String imagemUrl;
   String data;
+  String texto;
+  String acuracia;
 
   Dados();
 
-  Dados.fill(titulo, descricao, imagemUrl) {
+  Dados.fill(titulo, descricao,tipo, imagemUrl,acuracia,texto) {
     this.titulo = titulo;
     this.descricao = descricao;
+    this.tipo = tipo;
     this.imagemUrl = imagemUrl;
+    this.acuracia = acuracia;
+    this.texto = texto;
   }
 
   List<Dados> getDados() {

@@ -1,11 +1,9 @@
+import 'package:agro_app/screens/screens.home/noticia.dart';
+import 'package:agro_app/shared/models/Noticia.dart';
 import 'package:agro_app/shared/models/Predicao.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-/*
-@author: Luis Antônio
-conteudo home ---noticias e gráficos 
-*/
 class HomeConteudo extends StatefulWidget {
   @override
   _HomeConteudoState createState() => _HomeConteudoState();
@@ -24,7 +22,7 @@ class _HomeConteudoState extends State<HomeConteudo> {
             children: <Widget>[
               //predições realizadas
               Container(
-                width: MediaQuery.of(context).size.width /0.5,
+                width: MediaQuery.of(context).size.width / 0.5,
                 height: MediaQuery.of(context).size.width,
                 child: Card(
                   shape: RoundedRectangleBorder(
@@ -45,7 +43,7 @@ class _HomeConteudoState extends State<HomeConteudo> {
                   ),
                 ),
               ),
-              SizedBox(height: MediaQuery.of(context).size.width/20),
+              SizedBox(height: MediaQuery.of(context).size.width / 20),
               Card(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0)),
@@ -58,20 +56,19 @@ class _HomeConteudoState extends State<HomeConteudo> {
                       ),
                       noticiaRow(
                           context,
-                          'Exportações do agronegócio são recordes mas faturamento cai',
-                          'imagens/news1.jpg',
-                          1),
+                          new Noticia.fill(
+                              'Exportações do agronegócio são recordes mas faturamento cai',
+                              'descricao',
+                              'imagens/news1.jpg',
+                              'texto')),
                       SizedBox(height: 5),
-                      noticiaRow(
+                       noticiaRow(
                           context,
-                          'Exportações do agronegócio são recordes mas faturamento cai',
-                          'imagens/news1.jpg',
-                          2),
-                      noticiaRow(
-                          context,
-                          'Exportações do agronegócio são recordes mas faturamento cai',
-                          'imagens/news1.jpg',
-                          3),
+                          new Noticia.fill(
+                              'Como a Inteligência Artificial vai transformar o agronegócio',
+                              'descricao',
+                              'imagens/imgs.jpg',
+                              'texto')),
                     ],
                   ),
                 ),
@@ -83,22 +80,21 @@ class _HomeConteudoState extends State<HomeConteudo> {
     );
   }
 }
- 
-Widget noticiaRow(BuildContext context, String titulo, String imagemNoticia,
-        int idNoticia) =>
-    MaterialButton(
+
+Widget noticiaRow(BuildContext context, Noticia noticia) => MaterialButton(
       child: Card(
         elevation: 0,
         child: ListTile(
           leading: CircleAvatar(
-            maxRadius: 35,
-            backgroundImage: AssetImage(imagemNoticia),
+            maxRadius: 30,
+            backgroundImage: AssetImage(noticia.imagemUrl),
           ),
-          title:Text(titulo),
+          title: Text(noticia.titulo),
         ),
       ),
       onPressed: () {
-        print('tap noticia');
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => NoticiaPage(noticia)));
       },
     );
 
@@ -109,8 +105,8 @@ class GraficoContainer extends StatelessWidget {
       padding: EdgeInsets.all(6),
       decoration: BoxDecoration(border: Border.all(color: Colors.black12)),
       child: Container(
-        width: MediaQuery.of(context).size.width/1.1,
-        height:MediaQuery.of(context).size.height/2.8,
+        width: MediaQuery.of(context).size.width / 1.1,
+        height: MediaQuery.of(context).size.height / 2.8,
         child: SfCartesianChart(
             primaryXAxis: CategoryAxis(),
             legend: Legend(isVisible: true),

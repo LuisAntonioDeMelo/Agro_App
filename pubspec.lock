@@ -35,14 +35,14 @@ packages:
       name: charts_common
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.8.1"
+    version: "0.7.0"
   charts_flutter:
     dependency: "direct main"
     description:
       name: charts_flutter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.8.1"
+    version: "0.7.0"
   collection:
     dependency: transitive
     description:
@@ -136,7 +136,7 @@ packages:
       name: intl
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.16.0"
+    version: "0.15.8"
   logging:
     dependency: transitive
     description:

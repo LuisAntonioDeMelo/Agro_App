@@ -1,6 +1,9 @@
 import 'dart:io';
 
 import 'package:agro_app/components/camera-permissao.component.dart';
+import 'package:agro_app/screens/screens.predicoes/detalhes-predicao.dart';
+import 'package:agro_app/shared/models/Dados.dart';
+import 'package:agro_app/shared/models/Dados.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -67,56 +70,7 @@ class _GaleriaImagensState extends State<GaleriaImagens> {
                   },
                 ),
               ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                width: MediaQuery.of(context).size.width / 0.5,
-                height: MediaQuery.of(context).size.height/5,
-                child: Card(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0)),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      const ListTile(
-                        title: Center(
-                          child: Text(
-                            "Propriedades",
-                            style: TextStyle(color: Colors.black87,fontWeight: FontWeight.w700,fontSize: 18),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: <Widget>[
-                          Text("Imagem"), Text("500x500")],
-                      ),
-                       SizedBox(
-                        height: 4,
-                      ),
-                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: <Widget>[
-                          Text("Arquivo"), Text("file_agro.jpg")],
-                      ),
-                       SizedBox(
-                        height: 4,
-                      ),
-                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: <Widget>[
-                          Text("Download"), Text("2.1 mb")],
-                      ),
-                       SizedBox(
-                        height: 4,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+
             ],
           ),
         ],
@@ -131,6 +85,15 @@ class _GaleriaImagensState extends State<GaleriaImagens> {
             await ImagePicker.pickImage(source: ImageSource.gallery);
         this.setState(() {
           imagem = imagemGaleria;
+           Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Detalhe(
+              new Dados.fill(
+                "titulo", 
+                "descricao", 
+                "tipo",
+                 "imagemUrl", 
+                 "acuracia",
+                  "texto"))));
         });
       }
     } catch (e) {

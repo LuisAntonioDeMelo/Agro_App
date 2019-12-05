@@ -15,13 +15,14 @@ dependencies:
   firebase_storage: ^3.0.4
 
   cupertino_icons: ^0.1.2
-  charts_flutter: ^0.8.1
   syncfusion_flutter_charts: ^17.3.26
+  charts_flutter: ^0.7.0
 
   image_picker: ^0.5.3
   cached_network_image: any
 
   permission_handler: '^4.0.0'
+  
 
 dev_dependencies:
   flutter_test:

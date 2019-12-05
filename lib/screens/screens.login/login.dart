@@ -3,10 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-/*
-  @author :Luis Antônio 
-  //Pagina princinpal de login
-*/
 class PaginaLogin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -156,6 +152,8 @@ class FormularioState extends State<FormularioWig> {
           style: TextStyle(color: Colors.black38),
         ),
         onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => DashBoard()));
           print('direcionar para tela de recuperação');
         },
       ),
@@ -181,12 +179,8 @@ class FormularioState extends State<FormularioWig> {
             style: TextStyle(color: Colors.white),
           ),
         ),
-        onPressed: () {
-          //async { 
-          // TODO:comitei a validação apenas para  continuar o desennvolvimento
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => DashBoard()));
-          // await signIn();
+        onPressed: () async { 
+          await signIn();
         },
       ),
     );
